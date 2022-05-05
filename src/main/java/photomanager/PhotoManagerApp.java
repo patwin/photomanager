@@ -22,6 +22,12 @@ public class PhotoManagerApp {
         album.addPhoto(photo1);
         management.addAlbum(album);
 
+        PhotoAlbum album1 = new PhotoAlbum("Sommer", "Patrick");
+        Photo photo2 = new Photo("Wiese", "images/7861351302_74a45956dd_o.jpg", new PhotoMetadata(1024, 1024, "NIKON CORPORATION", 
+            "NIKON D750", LocalDateTime.now()));
+        album1.addPhoto(photo2);
+        management.addAlbum(album1);
+
         management.printAllAlbums();
     }
 }

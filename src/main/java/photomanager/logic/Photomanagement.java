@@ -5,23 +5,25 @@ package photomanager.logic;
  */
 
  
-import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 
 public class Photomanagement {
     
-    private List<PhotoAlbum> photoAlbums;
+    private Set<PhotoAlbum> photoAlbums;
 
 
     public Photomanagement() {
-        this.photoAlbums = new ArrayList<>();
+        this.photoAlbums = new HashSet<>();
     }
 
 
     // GETTER-METHODS
     public List<PhotoAlbum> getPhotoAlbums() {
-        return this.photoAlbums;
+        return new ArrayList<>(this.photoAlbums);
     }
 
 

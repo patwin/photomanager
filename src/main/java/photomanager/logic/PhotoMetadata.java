@@ -6,6 +6,7 @@ package photomanager.logic;
 
 
  import java.time.LocalDateTime;
+import java.util.Objects;
 
 
 public class PhotoMetadata {
@@ -51,5 +52,29 @@ public class PhotoMetadata {
     @Override
     public String toString() {
         return  this.width + "px * " + this.height + "px " + this.cameraBrand + " " + this.cameraModel + " " + this.dateOfCreation;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.width, this.height, this.cameraBrand, this.cameraModel, this.dateOfCreation);
+    }
+
+    @Override
+    public boolean equals (Object object) {
+        if (!(object instanceof PhotoObject)) {
+            return false;
+        }
+
+        if (this == object) {
+            return true;
+        }
+
+        PhotoMetadata otherMeta = (PhotoMetadata) object;
+
+        return this.width == otherMeta.getWidth() 
+            && this.height == otherMeta.getHeight()
+            && this.cameraBrand.equals(otherMeta.getCameraBrand())
+            && this.cameraModel.equals(otherMeta.getCameraModel())
+            && this.dateOfCreation.equals(otherMeta.getDateOfCreation());
     }
 }

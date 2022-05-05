@@ -4,35 +4,32 @@ package photomanager.logic;
  * @author Patrick Winter
  */
 
-import java.util.List;
+import java.util.Set;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 
-public class PhotoAlbum {
+public class PhotoAlbum extends PhotoObject implements Comparable<PhotoAlbum> {
     
-    private String name;
     private String owner;
-    private List<Photo> photoAlbum;
+    private Set<Photo> photoAlbum;
 
 
     public PhotoAlbum (String name, String owner) {
-        this.name = name;
+        super(name);
         this.owner = owner;
-        this.photoAlbum = new ArrayList<>();
+        this.photoAlbum = new HashSet<>();
     }
 
 
     // GETTER-METHODS
-    public String getName() {
-        return this.name;
-    }
-
     public String getOwner() {
         return this.owner;
     }
 
     public List<Photo> getPhotos() {
-        return this.photoAlbum;
+        return new ArrayList<>(photoAlbum);
     }
 
 
@@ -42,8 +39,10 @@ public class PhotoAlbum {
     }
 
     public void print() {
-        System.out.println("Name: " + this.name);
+        System.out.println("Name: " + this.getName());
         System.out.println("Besitzer: " +this.owner);
+
+        List<Photo> photoAlbum = this.getPhotos();
         
         for (int i = 0; i < this.photoAlbum.size(); i++) {
             System.out.println("=== Foto " + (i + 1) + " ===");
@@ -53,7 +52,17 @@ public class PhotoAlbum {
 
     @Override
     public String toString() {
-        return this.name + " " + this.owner + " " + this.photoAlbum;
+        return super.toString() + " " + this.owner + " " + this.photoAlbum;
+    }
+
+
+    @Override
+    public int compareTo(PhotoAlbum other) {
+        if (this == other) {
+            return 0;
+        }
+
+        return this.getName().compareTo(other.getName());
     }
 
 }
