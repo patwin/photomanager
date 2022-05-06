@@ -1,4 +1,4 @@
-package photomanager.logic;
+package photomanager.logic.photo;
 
 /**
  * @author Patrick Winter

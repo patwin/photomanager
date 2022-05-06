@@ -1,4 +1,4 @@
-package photomanager.logic;
+package photomanager.logic.photo;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;

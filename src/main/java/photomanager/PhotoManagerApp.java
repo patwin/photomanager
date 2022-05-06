@@ -2,10 +2,10 @@ package photomanager;
 
 import java.time.LocalDateTime;
 
-import photomanager.logic.Photo;
-import photomanager.logic.PhotoAlbum;
-import photomanager.logic.PhotoMetadata;
-import photomanager.logic.Photomanagement;
+import photomanager.logic.photo.Photo;
+import photomanager.logic.photo.PhotoAlbum;
+import photomanager.logic.photo.PhotoMetadata;
+import photomanager.logic.photo.Photomanagement;
 
 /**
  * @author Patrick Winter
