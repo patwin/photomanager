@@ -5,9 +5,7 @@ package photomanager.logic.photo;
  */
 
 import java.util.Set;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 
 public class PhotoAlbum extends PhotoObject implements Comparable<PhotoAlbum> {
@@ -28,8 +26,8 @@ public class PhotoAlbum extends PhotoObject implements Comparable<PhotoAlbum> {
         return this.owner;
     }
 
-    public List<Photo> getPhotos() {
-        return new ArrayList<>(photoAlbum);
+    public Set<Photo> getPhotos() {
+        return this.photoAlbum;
     }
 
 
@@ -42,17 +40,17 @@ public class PhotoAlbum extends PhotoObject implements Comparable<PhotoAlbum> {
         System.out.println("Name: " + this.getName());
         System.out.println("Besitzer: " +this.owner);
 
-        List<Photo> photoAlbum = this.getPhotos();
+        //List<Photo> photoAlbum = this.getPhotos();
         
         for (int i = 0; i < this.photoAlbum.size(); i++) {
             System.out.println("=== Foto " + (i + 1) + " ===");
-            photoAlbum.get(i).print();
+            //photoAlbum.get(i).print();
         }
     }
 
     @Override
     public String toString() {
-        return super.toString() + " " + this.owner + " " + this.photoAlbum;
+        return super.toString();
     }
 
 

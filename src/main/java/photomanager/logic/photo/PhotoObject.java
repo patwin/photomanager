@@ -39,7 +39,7 @@ public abstract class PhotoObject {
     // METHODS
     @Override
     public String toString() {
-        return this.id + " " + this.name;
+        return this.name;
     }
 
     @Override

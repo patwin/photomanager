@@ -6,9 +6,7 @@ package photomanager.logic.photo;
 
  
 import java.util.Set;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 
 
 public class Photomanagement {
@@ -22,8 +20,8 @@ public class Photomanagement {
 
 
     // GETTER-METHODS
-    public List<PhotoAlbum> getPhotoAlbums() {
-        return new ArrayList<>(this.photoAlbums);
+    public Set<PhotoAlbum> getPhotoAlbums() {
+        return this.photoAlbums;
     }
 
 
