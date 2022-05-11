@@ -1,5 +1,11 @@
 package photomanager.logic.photo;
 
+
+/**
+ * @author Patrick Winter
+ */
+
+
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
@@ -8,11 +14,18 @@ public class Photo extends PhotoObject {
     private String dataname;
     private PhotoMetadata metadata;
 
+    private static final long serialVersionUID = -4145083531653430515L;
+
 
     public Photo (String name, String dataname, PhotoMetadata metadata) {
         super(name);
         this.dataname = dataname;
         this.metadata = metadata;
+    }
+
+    public Photo (String name, String dataname) {
+        super(name);
+        this.dataname = dataname;
     }
 
 
@@ -23,6 +36,12 @@ public class Photo extends PhotoObject {
 
     public PhotoMetadata getMetadata() {
         return this.metadata;
+    }
+
+
+    // SETTER_METHODS
+    public void setMetadata(PhotoMetadata metadata) {
+        this.metadata = metadata;
     }
 
 

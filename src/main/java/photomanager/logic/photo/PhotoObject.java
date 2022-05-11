@@ -1,19 +1,23 @@
 package photomanager.logic.photo;
 
-import java.util.Objects;
 
 /**
  * @author Patrick Winter
  */
 
 
+import java.io.Serializable;
+
+import java.util.Objects;
 import java.util.UUID;
 
 
-public abstract class PhotoObject {
+public abstract class PhotoObject implements Serializable {
     
     private final String id;
     private String name;
+
+    private static final long serialVersionUID = -4145083531653430517L;
 
 
     public PhotoObject (String name) {

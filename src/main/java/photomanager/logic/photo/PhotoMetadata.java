@@ -1,21 +1,26 @@
 package photomanager.logic.photo;
 
+import java.io.Serializable;
+
+
 /**
  * @author Patrick Winter
  */
 
 
- import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 
-public class PhotoMetadata {
+public class PhotoMetadata implements Serializable {
     
     private int width;
     private int height;
     private String cameraModel;
     private String cameraBrand;
     private LocalDateTime dateOfCreation;
+
+    private static final long serialVersionUID = -4145083531653430514L;
 
 
     public PhotoMetadata (int width, int height, String cameraBrand, String cameraModel, LocalDateTime dateOfCreation) {

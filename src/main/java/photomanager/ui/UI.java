@@ -9,12 +9,16 @@ package photomanager.ui;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import com.drew.imaging.ImageProcessingException;
 
 import javafx.application.Application;
+
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.ColumnConstraints;
@@ -33,8 +37,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.geometry.Insets;
 
+import javafx.geometry.Insets;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import photomanager.logic.photo.Photo;
@@ -42,7 +47,6 @@ import photomanager.logic.photo.PhotoAlbum;
 import photomanager.logic.photo.Photomanagement;
 import photomanager.ui.views.AlbumCaptureView;
 import photomanager.ui.views.PhotoCaptureView;
-
 
 
 public class UI extends Application {
@@ -184,6 +188,9 @@ public class UI extends Application {
     // INITIALIZE PHOTOTILESPANE
     private ScrollPane initPhotoScrollPane() {
         this.photoScrollPane = new ScrollPane();
+        this.photoScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        this.photoScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        this.photoScrollPane.setFitToWidth(true);
 
         return this.photoScrollPane;
     }
@@ -277,10 +284,10 @@ public class UI extends Application {
         this.listOfPhotosInAlbum = FXCollections.observableSet();
         
         this.listOfPhotoAlbums.addListener((SetChangeListener<PhotoAlbum>) change -> {
-            if (change.wasAdded()) {               
+            if (change.wasAdded()) {     
                 PhotoAlbum addedAlbum = change.getElementAdded();
                 this.photoManagment.addAlbum(addedAlbum);
-                this.albumListView.getItems().add(addedAlbum);
+                this.albumListView.getItems().add(addedAlbum);                 
             }
         });
 
@@ -289,7 +296,13 @@ public class UI extends Application {
             @Override
             public void onChanged(SetChangeListener.Change<? extends Photo> change) {
                 Photo addedPhoto = change.getElementAdded();
-                currentPhotoAlbum.addPhoto(addedPhoto);
+                try {
+                    currentPhotoAlbum.addPhoto(addedPhoto);
+                } catch (ImageProcessingException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
                 photoScrollPane.setContent(showPhotoGallery(currentPhotoAlbum));                
             }
@@ -297,7 +310,8 @@ public class UI extends Application {
         });
 
         BorderPane layout = new BorderPane();
-        layout.setPrefSize(800, 600);
+        window.setWidth(Screen.getPrimary().getVisualBounds().getWidth());
+        window.setHeight(Screen.getPrimary().getVisualBounds().getHeight());
 
         layout.setTop(this.initMenu());
         layout.setLeft(this.initAlbumListView());
@@ -305,6 +319,17 @@ public class UI extends Application {
 
         
         /* =============== EVENTS =============== */
+
+        // CREATE SAVE ITEM EVENT
+        this.saveItem.setOnAction(event -> {
+            this.photoManagment.save();
+        });
+
+        // CREATE LOAD ITEM EVENT
+        this.loadItem.setOnAction(event -> {
+            this.photoManagment.load();
+            this.listOfPhotoAlbums.addAll(this.photoManagment.getPhotoAlbums());
+        });
 
         // CREATE NEW PHOTO BUTTON EVENT
         buttonAddPhoto.setOnAction(event -> {

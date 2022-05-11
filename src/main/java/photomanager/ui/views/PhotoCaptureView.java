@@ -1,19 +1,20 @@
 package photomanager.ui.views;
 
 
-import java.io.File;
-import java.time.LocalDateTime;
+/**
+ * @author Patrick Winter
+ */
 
-import com.drew.metadata.Metadata;
+
+import java.io.File;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import photomanager.logic.photo.Photo;
-import photomanager.logic.photo.PhotoMetadata;
 
 
 public class PhotoCaptureView extends CaptureView<Photo> {
@@ -51,10 +52,10 @@ public class PhotoCaptureView extends CaptureView<Photo> {
             return false;
         }
 
-        String name = "Test";
+        String name = ((TextField) this.getNodeByCoordinate(0, 1)).getText();
         String dataname = dataInformationLabel.getText();
 
-        Photo newPhoto = new Photo(name, dataname, new PhotoMetadata(1024, 1024, "Canon", "cameraModel", LocalDateTime.now()));
+        Photo newPhoto = new Photo(name, dataname);
         this.photo = newPhoto;
         
         return true;
